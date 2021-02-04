@@ -65,8 +65,11 @@
   <ItemGroup>
     <Compile Include="Assets\Base\01\Clock.cs" />
     <Compile Include="Assets\Base\02\Graph.cs" />
-    <Compile Include="Assets\Movement Tutorials\01Player-Controlled Motion\MovingSphere.cs" />
-    <Compile Include="Assets\Movement Tutorials\02Pushing a Sphere Around\MovingSphere.cs" />
+    <Compile Include="Assets\Movement Tutorials\01Player-Controlled Motion\MovingSphere01.cs" />
+    <Compile Include="Assets\Movement Tutorials\02Pushing a Sphere Around\MovingSphere02.cs" />
+    <Compile Include="Assets\Movement Tutorials\03Staying in Touch\MovingSphere03.cs" />
+    <Compile Include="Assets\Movement Tutorials\04Relative Control\MovingSphere04.cs" />
+    <Compile Include="Assets\Movement Tutorials\04Relative Control\OrbitCamera.cs" />
     <None Include="Assets\Base\02\ColoredPoint.shader" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program/Unity/Unity2019/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
@@ -602,6 +605,15 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder">
+      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.Editor">
+      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -617,23 +629,14 @@
     <Reference Include="Unity.Rider.Editor">
       <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder">
-      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.Editor">
-      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>E:/Github/MyGithub/Catlike-Study/Catlike/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup></ItemGroup>

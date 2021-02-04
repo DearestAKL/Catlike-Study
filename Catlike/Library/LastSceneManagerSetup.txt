@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Movement Tutorials/02Pushing a Sphere Around/Movement02.unity
+- path: Assets/Movement Tutorials/04Relative Control/Movement04.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
