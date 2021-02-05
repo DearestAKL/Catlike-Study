@@ -920,7 +920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1749894846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 0.5, z: -1.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -935,7 +935,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1749894846}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75f8daf3c8a03ca4db0c606f7e0508e6, type: 3}
+  m_Script: {fileID: 11500000, guid: 2374b0c235a018f4997a79508bef856d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 10
@@ -943,16 +943,17 @@ MonoBehaviour:
   maxAirAcceleration: 1
   jumpHight: 2
   maxAirJumps: 0
-  maxGroundAngle: 46
+  maxGroundAngle: 25
   maxStairsAngle: 50
   maxSnapSpeed: 100
   probeDistance: 1
   probeMask:
     serializedVersion: 2
-    m_Bits: 1075
+    m_Bits: 4294967295
   stairsMask:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 4294967295
+  playerInputSpace: {fileID: 1911110718}
 --- !u!96 &1749894852
 TrailRenderer:
   serializedVersion: 2
@@ -1144,7 +1145,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1911110715}
   m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 0, y: 4, z: -3.5}
+  m_LocalPosition: {x: 0, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1163,15 +1164,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focus: {fileID: 1749894850}
-  distance: 5
+  distance: 10
   focusRadius: 1
+  focusCentering: 0.5
+  rotationSpeed: 90
+  minVerticalAngle: -30
+  maxVerticalAngle: 60
+  alignDelay: 5
+  alignSmoothRange: 45
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!43 &2028719916
 Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-42226
+  m_Name: pb_Mesh13890
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -7,7 +7,7 @@ namespace Movement04
     public class MovingSphere04 : MonoBehaviour
     {
 
-        private Vector2 m_PlayerInput;  //用户输入
+        private Vector2 playerInput;  //用户输入
         private Vector3 velocity;       //缓存速度
         private Vector3 desiredVelocity;    //目标速度
 
@@ -44,6 +44,9 @@ namespace Movement04
         [SerializeField, Header("楼梯Layer")]
         private LayerMask stairsMask = -1;
 
+        [SerializeField]
+        Transform playerInputSpace = default;
+
         private Rigidbody body;
 
         private bool desiredJump;   //想要跳跃
@@ -77,11 +80,25 @@ namespace Movement04
 
         void Update()
         {
-            m_PlayerInput.x = Input.GetAxis("Horizontal");
-            m_PlayerInput.y = Input.GetAxis("Vertical");
-            m_PlayerInput = Vector2.ClampMagnitude(m_PlayerInput, 1f);
+            playerInput.x = Input.GetAxis("Horizontal");
+            playerInput.y = Input.GetAxis("Vertical");
+            playerInput = Vector2.ClampMagnitude(playerInput, 1f);
 
-            desiredVelocity = new Vector3(m_PlayerInput.x, 0f, m_PlayerInput.y) * maxSpeed;
+            if (playerInputSpace)
+            {
+                Vector3 forward = playerInputSpace.forward;
+                forward.y = 0f;
+                forward.Normalize();
+                Vector3 right = playerInputSpace.right;
+                right.y = 0f;
+                right.Normalize();
+                desiredVelocity = (forward * playerInput.y + right * playerInput.x) * maxSpeed;
+                //desiredVelocity = playerInputSpace.TransformDirection(playerInput.x, 0f, playerInput.y) * maxSpeed;
+            }
+            else
+            {
+                desiredVelocity = new Vector3(playerInput.x, 0f, playerInput.y) * maxSpeed;
+            }
 
             desiredJump |= Input.GetButtonDown("Jump");
 
