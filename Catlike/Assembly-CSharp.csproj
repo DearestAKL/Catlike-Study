@@ -70,6 +70,14 @@
     <Compile Include="Assets\Movement Tutorials\03Staying in Touch\MovingSphere03.cs" />
     <Compile Include="Assets\Movement Tutorials\04Relative Control\MovingSphere04.cs" />
     <Compile Include="Assets\Movement Tutorials\04Relative Control\OrbitCamera.cs" />
+    <Compile Include="Assets\Movement Tutorials\05Walking on a Sphere\CustomGravity05.cs" />
+    <Compile Include="Assets\Movement Tutorials\05Walking on a Sphere\CustomGravityRigidbody05.cs" />
+    <Compile Include="Assets\Movement Tutorials\05Walking on a Sphere\MovingSphere05.cs" />
+    <Compile Include="Assets\Movement Tutorials\05Walking on a Sphere\OrbitCamera05.cs" />
+    <Compile Include="Assets\Movement Tutorials\06Gravity Planes, Spheres, and Boxes\CustomGravity06.cs" />
+    <Compile Include="Assets\Movement Tutorials\06Gravity Planes, Spheres, and Boxes\CustomGravityRigidbody06.cs" />
+    <Compile Include="Assets\Movement Tutorials\06Gravity Planes, Spheres, and Boxes\MovingSphere06.cs" />
+    <Compile Include="Assets\Movement Tutorials\06Gravity Planes, Spheres, and Boxes\OrbitCamera06.cs" />
     <None Include="Assets\Base\02\ColoredPoint.shader" />
     <Reference Include="UnityEngine">
       <HintPath>D:/Program/Unity/Unity2019/2019.4.0f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>

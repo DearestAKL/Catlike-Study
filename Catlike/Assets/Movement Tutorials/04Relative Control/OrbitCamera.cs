@@ -58,10 +58,7 @@ namespace Movement04
 
         private void LateUpdate()
         {
-            //Vector3 focusPoint = focus.position;
             UpdateFocusPoint();
-            //ManualRotation();
-            //Quaternion lookRotation = Quaternion.Euler(orbitAngles);
 
             Quaternion lookRotation;
             if (ManualRotation() || AutomationRotation())
@@ -78,12 +75,13 @@ namespace Movement04
             Vector3 lookPosition = focusPoint - lookDirection * distance;
 
             Vector3 rectOffset = lookDirection * regularCamera.nearClipPlane;
-            Vector3 rectPosition = lookDirection * regularCamera.nearClipPlane;
+            Vector3 rectPosition = lookPosition + rectOffset;
             Vector3 castForm = focus.position;
             Vector3 castLine = rectPosition - castForm;
-            float castDistance = castLine.magnitude;
-            Vector3 castDirection = castLine / castDistance;
+            float castDistance = castLine.magnitude;//向量 长度
+            Vector3 castDirection = castLine / castDistance;//单位向量
 
+            //碰撞检测 规避障碍
             if (Physics.BoxCast(castForm, CameraHalfExtends, castDirection, out RaycastHit hit,lookRotation, castDistance, obstructionMask))
             {
                 rectPosition = castForm + castDirection * hit.distance;
@@ -103,7 +101,6 @@ namespace Movement04
             if(focusRadius > 0f)
             {
                 //存在缓存半径
-
                 float distance = Vector3.Distance(targetPoint, focusPoint);//目标点 与焦点的距离
                 float t = 1f;
                 if(distance > 0.01f && focusCentering > 0f)
@@ -143,6 +140,7 @@ namespace Movement04
             const float e = 0.001f;
             if(input.x <-e || input.x > e || input.y < -e || input.y > e)
             {
+                //摄像机旋转
                 orbitAngles += rotationSpeed * Time.unscaledDeltaTime * input;
                 lastManualRotationTime = Time.unscaledDeltaTime;
                 return true;
@@ -151,6 +149,9 @@ namespace Movement04
             return false;
         }
 
+        /// <summary>
+        /// 约束角度
+        /// </summary>
         private void ConstrainAngles()
         {
             orbitAngles.x = Mathf.Clamp(orbitAngles.x, minVerticalAngle, maxVerticalAngle);
@@ -210,6 +211,7 @@ namespace Movement04
             //return angle;
             return direction.x < 0f ? 360f - angle : angle;
         }
+
 
         Vector3 CameraHalfExtends
         {
