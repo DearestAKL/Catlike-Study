@@ -15,7 +15,7 @@ namespace Movement05
         {
             //return position.normalized;
             Vector3 up = position.normalized;
-            return Physics.gravity.y < 0F ? up : -up;
+            return Physics.gravity.y < 0f ? up : -up;
         }
 
         public static Vector3 GetGravity(Vector3 position, out Vector3 upAxis)

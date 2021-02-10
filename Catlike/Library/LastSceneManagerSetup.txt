@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Movement Tutorials/05Walking on a Sphere/Inverted Planet05.unity
+- path: Assets/Movement Tutorials/06Gravity Planes, Spheres, and Boxes/Gravity Box06.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
