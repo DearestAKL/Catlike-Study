@@ -6,9 +6,9 @@ namespace Movement02
 {
     public class MovingSphere02 : MonoBehaviour
     {
-        private Vector2 m_PlayerInput;
-        private Vector3 velocity;
-        private Vector3 desiredVelocity;
+        private Vector2 m_PlayerInput;//用户输入
+        private Vector3 velocity;//缓存速度
+        private Vector3 desiredVelocity;//期望速度
 
         [SerializeField,Range(0f,100f), Header("最大速度")]
         private float maxSpeed = 10f;
@@ -25,16 +25,15 @@ namespace Movement02
         [SerializeField, Range(0, 5), Header("空中跳跃")]
         private int maxAirJumps = 0;
 
-        [SerializeField, Range(0F, 90F), Header("角度")]
+        [SerializeField, Range(0F, 90F), Header("最大地面角度")]
         private float maxGroundAngle = 25f;
 
         Rigidbody body;
 
-        bool desiredJump;
-        //bool onGround;
-        int jumpPhase;
-        float minGroundDotProduct;
-        int groundContactCount;
+        private bool desiredJump;
+        private int jumpPhase;
+        private float minGroundDotProduct;
+        private int groundContactCount;//接触地面数量
 
         bool OnGround => groundContactCount > 0;
 
@@ -45,6 +44,8 @@ namespace Movement02
 
         private void OnValidate()
         {
+            //Mathf.Deg2Rad 度转弧度 
+            //获取最小的地面的点积
             minGroundDotProduct = Mathf.Cos(maxGroundAngle * Mathf.Deg2Rad);
         }
 
@@ -58,12 +59,16 @@ namespace Movement02
         {
             m_PlayerInput.x = Input.GetAxis("Horizontal");
             m_PlayerInput.y = Input.GetAxis("Vertical");
+
+            //获取长度为1f 的向量副本
             m_PlayerInput = Vector2.ClampMagnitude(m_PlayerInput, 1f);
 
+            //预期速度
             desiredVelocity = new Vector3(m_PlayerInput.x, 0f, m_PlayerInput.y) * maxSpeed;
 
+            //按下jump 为true否则为false
             desiredJump |= Input.GetButtonDown("Jump");
-
+           
             GetComponent<Renderer>().material.SetColor("_Color", Color.white * (groundContactCount * 0.25f)) ;
         }
 
@@ -71,11 +76,6 @@ namespace Movement02
         {
             UpdateState();
             AdjustVelocity();
-
-            //float acceleration = onGround ? maxAcceleration : maxAirAcceleration;
-            //float maxSpeedChange = acceleration * Time.fixedDeltaTime;
-            //velocity.x = Mathf.MoveTowards(velocity.x, desiredVelocity.x, maxSpeedChange);
-            //velocity.z = Mathf.MoveTowards(velocity.z, desiredVelocity.z, maxSpeedChange);
 
             if (desiredJump)
             {
@@ -95,7 +95,9 @@ namespace Movement02
         /// </summary>
         private void UpdateState()
         {
+            //获取当前速度
             velocity = body.velocity;
+
             if (OnGround)
             {
                 jumpPhase = 0;
@@ -109,6 +111,8 @@ namespace Movement02
                 contactNormal = Vector3.up;
             }
         }
+
+        //清除状态
         private void ClearState()
         {
             //onGround = false;
@@ -125,27 +129,24 @@ namespace Movement02
             if (OnGround || jumpPhase < maxAirJumps)
             {
                 jumpPhase += 1;
+                //速度值
                 float jumpSpeed = Mathf.Sqrt(-2f * Physics.gravity.y * jumpHight);
+                //对齐速度值
                 float alignedSpeed = Vector3.Dot(velocity, contactNormal);
                 if (velocity.y > 0)
                 {
+                    //获取实际的 基于法线的 跳跃速度值
                     jumpSpeed = Mathf.Max(jumpSpeed - alignedSpeed, 0f);
                 }
-                //velocity.y += jumpSpeed;
                 velocity += contactNormal * jumpSpeed;
             }
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            //onGround = true;
             EvaluateCollision(collision);
         }
 
-        //private void OnCollisionExit(Collision collision)
-        //{
-        //    onGround = false;
-        //}
 
         private void OnCollisionStay(Collision collision)
         {
@@ -162,7 +163,6 @@ namespace Movement02
             for (int i = 0; i < collision.contactCount; i++)
             {
                 Vector3 normal = collision.GetContact(i).normal;
-                //onGround |= normal.y >= minGroundDotProduct;
                 if(normal.y >= minGroundDotProduct)
                 {
                     //onGround = true;
@@ -180,7 +180,7 @@ namespace Movement02
         /// <returns></returns>
         private Vector3 ProjectOnContactPlane(Vector3 vector)
         {
-            //v - n*(|v|*cos角) 求斜边方向向量
+            //v - n*(|v|*cos角) 把速度分解为斜边方向与斜边法线方向 求斜边方向向量
             return vector - contactNormal * Vector3.Dot(vector, contactNormal);
         }
 
@@ -195,8 +195,7 @@ namespace Movement02
             Vector3 xAxis = ProjectOnContactPlane(Vector3.right).normalized;
             Vector3 zAxis = ProjectOnContactPlane(Vector3.forward).normalized;
 
-            //求在在世界坐标中X轴和Z轴投影长度 也就是相对的X和Z的速度
-            //相对于地面
+            //求在在世界坐标中X轴和Z轴投影长度 也就是相对斜边的X和Z的速度
             float currentX = Vector3.Dot(velocity, xAxis);
             float currentZ = Vector3.Dot(velocity, zAxis);
 
